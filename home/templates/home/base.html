@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+    {% block corecss %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+
+    {% block extracss %}{% endblock %}
+
+    {% block corejs %}
+    <script
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous">
+    </script>
+    {% endblock %}
+
+    <title>HelpSavvy Financial | {% block title %}{% endblock %}</title>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav class="navbar is-transparent" role="navigation" aria-label="main-navigation">
+        <div class="navbar-brand">
+            <a href="{% url 'index' %}" class="navbar-item" id="nav-title">
+                HelpSavvy Financial
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="nav-links" class="navbar-menu">
+            <div class="navbar-start">
+                <a href="{% url 'index' %}" class="navbar-item wnqidonqdwinwid">
+                    Home
+                </a>
+
+                <a href="{% url 'primary' %}" class="navbar-item">
+                    Budget
+                </a>
+
+                <a href="{% url 'view_expenses' %}" class="navbar-item">
+                    Track Expenses
+                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                    More
+                    </a>
+                <div class="navbar-dropdown">
+                <!-- <a href="{% url 'view_expenses' %}" class="navbar-item">
+                    Finance Data
+                </a> -->
+
+                <a href="{% url 'news' %}" class="navbar-item">
+                    News
+                </a>
+
+                <a href="{% url 'others' %}" class="navbar-item">
+                    FAQ
+                </a>
+            </div>
+                
+            </div>
+            </div>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'account_logout' %}" class="button is-light">
+                            Log Out
+                        </a>
+                    {% else %}
+                    
+                    <a href="{% url 'account_signup' %}" class="button is-primary">
+                        <strong>Sign Up</strong>
+                    </a>
+                    <a href="{% url 'account_login' %}" class="button is-light">
+                        Log in
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+
+        {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>HelpSavvy Financial</strong> by <a href="https://github.com/SamMartin92/hackathon-team-7">Deadline Chasing Devs</a>
+            </p>
+            <p class="copyright text-muted">Copyright &copy; HelpSavvy <span id="copyright"></span></p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/browsernews.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/financedata.js' %}"></script>
+    {% block postloadjs %}
+    <script>
+        $("#copyright").text(new Date().getFullYear());
+    </script>
+    {% endblock %}
+</body>
+
+</html>
